@@ -15,6 +15,9 @@ public class QuestionManager implements Serializable {
 		return currentQuestion;
 	}
 	
+	/** This method will initialize the QuestionManager and call the function to load the questions from a file
+	 * 
+	 */
 	public static void createNewQuestionManager(){
 		completedQuestions = new ArrayList<Question>();
 		remainingQuestions = new ArrayList<Question>();
@@ -24,6 +27,9 @@ public class QuestionManager implements Serializable {
 		remainingQuestions.remove(0);
 	}
 
+	/** This method will load all of the questions from a file and build the remainingQuestions ArrayList
+	 * 
+	 */
 	private static void loadQuestions() {
 		remainingQuestions.add(new Question("16 + 3","19"));
 		remainingQuestions.add(new Question("12 + 3","15"));

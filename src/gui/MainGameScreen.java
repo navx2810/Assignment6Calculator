@@ -115,6 +115,7 @@ public class MainGameScreen extends JFrame {
 	public void getNextQuestion(){
 		QuestionManager.loadNextQuestion();
 		mathDisplayPanel.buildQuestion();
+		currentAnswerSlot = 0;
 	}
 
 	public void redrawPanels(){

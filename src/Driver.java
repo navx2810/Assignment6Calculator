@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import entity.GameManager;
-import entity.Question;
 import entity.ScreenManager;
 
 public class Driver {

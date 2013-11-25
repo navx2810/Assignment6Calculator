@@ -87,7 +87,9 @@ public class MathDisplayPanel extends JPanel {
 		
 		for(int x=6; x<9; x++)
 			labels[x].setIcon(Assests.getIcon(Mode.LINE));
-			
+		
+		for(int x=9; x<12; x++)
+			labels[x].setIcon(Assests.getIcon(Mode.BLANK));
 	}
 	
 	public void buildAnswer(int value, int slot){
