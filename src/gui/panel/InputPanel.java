@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import entity.QuestionManager;
 import entity.ScreenManager;
 
 public class InputPanel extends JPanel {
@@ -26,15 +27,25 @@ public class InputPanel extends JPanel {
 		btnZero = new JButton("0");
 		btnZero.addActionListener(new BtnAction());
 		btnOne = new JButton("1");
+		btnOne.addActionListener(new BtnAction());
 		btnTwo = new JButton("2");
+		btnTwo.addActionListener(new BtnAction());
 		btnThree = new JButton("3");
+		btnThree.addActionListener(new BtnAction());
 		btnFour = new JButton("4");
+		btnFour.addActionListener(new BtnAction());
 		btnFive = new JButton("5");
+		btnFive.addActionListener(new BtnAction());
 		btnSix = new JButton("6");
+		btnSix.addActionListener(new BtnAction());
 		btnSeven = new JButton("7");
+		btnSeven.addActionListener(new BtnAction());
 		btnEight = new JButton("8");
+		btnEight.addActionListener(new BtnAction());
 		btnNine = new JButton("9");
+		btnNine.addActionListener(new BtnAction());
 		btnErase = new JButton("Delete");
+		btnErase.addActionListener(new BtnAction());
 		
 		add(btnOne);
 		add(btnTwo);
@@ -58,9 +69,12 @@ public class InputPanel extends JPanel {
 		{
 			JButton temp = (JButton) e.getSource();
 			if(e.getSource() == btnErase)
-				System.out.println("erase the last number");
-			else if(e.getSource() == btnConfirm)
-				System.out.println("confirm the answer");
+				ScreenManager.mainScreen.removeAnswer();
+			else if(e.getSource() == btnConfirm){
+				QuestionManager.checkAnswer();
+				ScreenManager.mainScreen.getNextQuestion();
+			}
+				
 			else 
 				ScreenManager.mainScreen.inputAnswer(Integer.parseInt(temp.getText()));
 		}

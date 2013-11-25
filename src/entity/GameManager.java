@@ -18,6 +18,7 @@ public class GameManager implements Serializable {
 	
 	private static final long serialVersionUID = 4923970702381591282L;
 	public static String  playerName;
+	public static StringBuilder currentAnswer = new StringBuilder();
 	public static QuestionManager questionManager;
 	public static File gameFile;
 	static JFileChooser chooser = new JFileChooser();
@@ -35,6 +36,7 @@ public class GameManager implements Serializable {
 
 	public static void createNewGame(){
 		GameManager.playerName = JOptionPane.showInputDialog(null, "What is your name?");
+		QuestionManager.createNewQuestionManager();
 	}
 	
 	public static void loadPreviousGame(File file) throws FileNotFoundException, IOException, ClassNotFoundException{

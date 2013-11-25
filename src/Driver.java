@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import entity.GameManager;
+import entity.Question;
 import entity.ScreenManager;
 
 public class Driver {
@@ -24,6 +25,8 @@ public class Driver {
 			if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
 				GameManager.loadPreviousGame(chooser.getSelectedFile());
 			else
+				GameManager.createNewGame();
+		else
 				GameManager.createNewGame();
 		
 		//Display the main screen

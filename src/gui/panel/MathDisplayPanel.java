@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 import resources.Assests;
 import resources.Assests.Mode;
-import entity.Question;
+import entity.QuestionManager;
 
 public class MathDisplayPanel extends JPanel {
 
@@ -21,9 +21,10 @@ public class MathDisplayPanel extends JPanel {
 	private static final long serialVersionUID = 52395739811456656L;
 	public JLabel[] labels = new JLabel[12];
 	public int currentAnswerSlot;
+
 	
 	public MathDisplayPanel(){
-		
+
 		setLayout(new GridLayout(4, 3));
 		
 //		TOP_LEFT = new JLabel();
@@ -52,12 +53,12 @@ public class MathDisplayPanel extends JPanel {
 		for(int x=0; x<labels.length; x++)
 			add(labels[x]);
 		
-		buildQuestion(new Question("12 + 4"));
-		
+//		buildQuestion(new Question("12 + 4","16")); //TODO Remove this
+		buildQuestion();
 	}
 	
-	public void buildQuestion(Question q){
-		String[] temp = q.question.split(" ");
+	public void buildQuestion(){
+		String[] temp = QuestionManager.currentQuestion.question.split(" ");
 		
 		for(int x=0; x<temp[0].length(); x++){
 			int position = (temp[0].length()-1)-x;
@@ -90,12 +91,12 @@ public class MathDisplayPanel extends JPanel {
 	}
 	
 	public void buildAnswer(int value, int slot){
-		System.out.println(slot+" "+value);
-			if(slot == 0)
-				labels[11].setIcon(Assests.getIcon(value));
-			else if(slot == 1)
-				labels[11].setIcon(Assests.getIcon(2));
-		
+				labels[11-slot].setIcon(Assests.getIcon(value));
+	}
+	
+	public void removeAnswer(int slot){
+			labels[11-slot].setIcon(Assests.getIcon(Mode.BLANK));
+			
 	}
 	
 }

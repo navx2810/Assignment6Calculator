@@ -19,9 +19,23 @@ public class QuestionManager implements Serializable {
 		completedQuestions = new ArrayList<Question>();
 		remainingQuestions = new ArrayList<Question>();
 		loadQuestions();
+		totalQuestions = remainingQuestions.size();
+		currentQuestion = remainingQuestions.get(0);
+		remainingQuestions.remove(0);
 	}
 
 	private static void loadQuestions() {
+		remainingQuestions.add(new Question("16 + 3","19"));
+		remainingQuestions.add(new Question("12 + 3","15"));
+	}
+
+	public static void checkAnswer() {
+		if(GameManager.currentAnswer.toString().equals(currentQuestion.answer)){
+			questionsRight++;
+			currentQuestion.answeredCorrectly = true;
+		}
+		completedQuestions.add(currentQuestion);
+		System.out.println("You've answered: "+questionsRight+"/"+totalQuestions+" right");
 		
 	}
 	

@@ -1,5 +1,6 @@
 package gui;
 
+import entity.GameManager;
 import entity.QuestionManager;
 import gui.panel.InputPanel;
 import gui.panel.MathDisplayPanel;
@@ -36,6 +37,7 @@ public class MainGameScreen extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 		
 		buildContentPanel();
 		
@@ -112,9 +114,9 @@ public class MainGameScreen extends JFrame {
 
 	public void getNextQuestion(){
 		QuestionManager.loadNextQuestion();
-		redrawPanels();
+		mathDisplayPanel.buildQuestion();
 	}
-	
+
 	public void redrawPanels(){
 		buildSimpleMathPanel();
 		buildFractionMathPanel();
@@ -123,8 +125,16 @@ public class MainGameScreen extends JFrame {
 	public void inputAnswer(int x){
 		if(currentAnswerSlot < 2){
 		mathDisplayPanel.buildAnswer(x,currentAnswerSlot);
-		redrawPanels();
+		GameManager.currentAnswer.insert(0, x);
 		currentAnswerSlot++;
+		}
+	}
+	
+	public void removeAnswer(){
+		if(currentAnswerSlot > 0){
+			mathDisplayPanel.removeAnswer(currentAnswerSlot-1);
+			GameManager.currentAnswer.deleteCharAt(0);
+			currentAnswerSlot--;
 		}
 	}
 }
