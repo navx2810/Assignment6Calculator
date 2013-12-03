@@ -13,14 +13,17 @@ public class QuestionManager implements Serializable {
 	private static final long serialVersionUID = 7812867479079348517L;
 	public static ArrayList<Question> completedQuestions, remainingQuestions;
 	public static Question currentQuestion;
+	public static StringBuilder currentUserAnswer;
 	public static int questionsRight, totalQuestions;
 	
 	/** This method will load the next question from the remainingQuestions array list 
 	 * @return - the next question from the remainingQuestions array list
 	 */
-	public static Question loadNextQuestion(){
+	public static void  loadNextQuestion(){
+		if(remainingQuestions.size() != 0)
 		currentQuestion = remainingQuestions.get(0);
-		return currentQuestion;
+		else 
+			GameManager.completeGame();
 	}
 	
 	/** This method will initialize the QuestionManager and call the function to load the questions from a file
@@ -33,6 +36,7 @@ public class QuestionManager implements Serializable {
 		totalQuestions = remainingQuestions.size();
 		currentQuestion = remainingQuestions.get(0);
 		remainingQuestions.remove(0);
+		currentUserAnswer = new StringBuilder();
 	}
 
 	/** This method will load all of the questions from a file and build the remainingQuestions ArrayList
@@ -50,6 +54,7 @@ public class QuestionManager implements Serializable {
 		if(GameManager.currentAnswer.toString().equals(currentQuestion.answer)){
 			questionsRight++;
 			currentQuestion.answeredCorrectly = true;
+			
 		}
 		completedQuestions.add(currentQuestion);
 		System.out.println("You've answered: "+questionsRight+"/"+totalQuestions+" right");

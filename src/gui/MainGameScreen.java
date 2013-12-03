@@ -90,7 +90,6 @@ public class MainGameScreen extends JFrame {
 		
 		mathDisplayPanel = new MathDisplayPanel();
 		
-		
 		inputPanel = new InputPanel();
 		
 		remainingQuestionsPanel = new JPanel(new BorderLayout());

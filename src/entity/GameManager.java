@@ -3,8 +3,10 @@ package entity;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import javax.swing.JFileChooser;
@@ -46,23 +48,42 @@ public class GameManager implements Serializable {
 	}
 	
 	/** This method will load the previous game file
-	 * @param file - the file where the game is saved
 	 * @throws FileNotFoundException 
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 */
-	public static void loadPreviousGame(File file) throws FileNotFoundException, IOException, ClassNotFoundException{
-		ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
+	public static void loadPreviousGame() throws FileNotFoundException, IOException, ClassNotFoundException{
+		if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+		{
+		gameFile = chooser.getSelectedFile();
+		ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(gameFile));
 		playerName = inputStream.readUTF();
 		questionManager = (QuestionManager) inputStream.readObject();
-		gameFile = file;
 		inputStream.close();
+		} else 
+			createNewGame();
 	}
 	
 	/** This method will display a fileChooser and ask where the user would like to save the file
 	 * then will save the file to that location
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public static void saveGame(){
+	public static void saveGame() throws FileNotFoundException, IOException{
+		if(chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
+		{
+			gameFile = chooser.getSelectedFile();
+			ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(gameFile));
+			outputStream.writeUTF(playerName);
+			outputStream.writeObject(questionManager);
+			outputStream.close();
+		} 
 		
+	}
+
+	public static void completeGame() {
+		// Tally score
+		// Display score
+		// Ask the user if they want to save or play again
 	}
 }

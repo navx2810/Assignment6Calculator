@@ -15,7 +15,7 @@ public class Assests {
 		}
 	}
 
-	public static Icon[] icons = new ImageIcon[17];
+	public static Icon[] icons = new ImageIcon[16];
 
 	/** This method will initially load the icons
 	 * 
