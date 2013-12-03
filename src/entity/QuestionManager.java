@@ -3,6 +3,11 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/** This class will be used to hold the current and completed questions
+ * and how many questions the player has answered correctly and incorrectly. 
+ * @author Matt
+ * 
+ */
 public class QuestionManager implements Serializable {
 	
 	private static final long serialVersionUID = 7812867479079348517L;
@@ -10,6 +15,9 @@ public class QuestionManager implements Serializable {
 	public static Question currentQuestion;
 	public static int questionsRight, totalQuestions;
 	
+	/** This method will load the next question from the remainingQuestions array list 
+	 * @return - the next question from the remainingQuestions array list
+	 */
 	public static Question loadNextQuestion(){
 		currentQuestion = remainingQuestions.get(0);
 		return currentQuestion;
@@ -35,6 +43,9 @@ public class QuestionManager implements Serializable {
 		remainingQuestions.add(new Question("12 + 3","15"));
 	}
 
+	/** This method will check if the answer the player has entered equals the current questions answer variable
+	 * @see GameManager
+	 */
 	public static void checkAnswer() {
 		if(GameManager.currentAnswer.toString().equals(currentQuestion.answer)){
 			questionsRight++;

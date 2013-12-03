@@ -12,9 +12,6 @@ import entity.ScreenManager;
 
 public class InputPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6411916676212388342L;
 	private JButton btnZero, btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnConfirm, btnErase;
 	

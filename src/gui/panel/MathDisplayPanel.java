@@ -11,9 +11,6 @@ import entity.QuestionManager;
 
 public class MathDisplayPanel extends JPanel {
 
-//	public static JLabel 	TOP_LEFT, TOP_MIDDLE, TOP_RIGHT, 
-//							MIDDLE_LEFT, MIDDLE_MIDDLE, MIDDLE_RIGHT,
-//							BOTTOM_LEFT, BOTTOM_MIDDLE, BOTTOM_RIGHT;
 	
 	/**
 	 * 
@@ -25,27 +22,7 @@ public class MathDisplayPanel extends JPanel {
 	
 	public MathDisplayPanel(){
 
-		setLayout(new GridLayout(4, 3));
-		
-//		TOP_LEFT = new JLabel();
-//		TOP_MIDDLE = new JLabel(Assests.ICON_ONE);
-//		TOP_RIGHT = new JLabel(Assests.ICON_ONE);
-//		MIDDLE_LEFT = new JLabel(Assests.ICON_ADDITION);
-//		MIDDLE_MIDDLE = new JLabel();
-//		MIDDLE_RIGHT = new JLabel(Assests.ICON_TWO);
-//		BOTTOM_LEFT = new JLabel();
-//		BOTTOM_MIDDLE = new JLabel();
-//		BOTTOM_RIGHT = new JLabel();
-//		
-//		add(TOP_LEFT);
-//		add(TOP_MIDDLE);
-//		add(TOP_RIGHT);
-//		add(MIDDLE_LEFT);
-//		add(MIDDLE_MIDDLE);
-//		add(MIDDLE_RIGHT);
-//		add(BOTTOM_LEFT);
-//		add(BOTTOM_MIDDLE);
-//		add(BOTTOM_RIGHT);
+		setLayout(new GridLayout(4, 3,0,0));
 		
 		for(int x=0; x<labels.length; x++)
 			labels[x] = new JLabel(Assests.getIcon(Mode.BLANK));
@@ -53,22 +30,24 @@ public class MathDisplayPanel extends JPanel {
 		for(int x=0; x<labels.length; x++)
 			add(labels[x]);
 		
-//		buildQuestion(new Question("12 + 4","16")); //TODO Remove this
 		buildQuestion();
 	}
 	
+	/** This method is used to build the current question sitting inside the QuestionManager
+	 * @see QuestionManager
+	 */
 	public void buildQuestion(){
-		String[] temp = QuestionManager.currentQuestion.question.split(" ");
+		String[] temp = QuestionManager.currentQuestion.question.split(" ");	//Split the question into an array
 		
-		for(int x=0; x<temp[0].length(); x++){
-			int position = (temp[0].length()-1)-x;
+		for(int x=0; x<temp[0].length(); x++){		// set the top layer icons of the grid to their corresponding value
+			int position = (temp[0].length()-1)-x;	
 			int value = Integer.parseInt(String.valueOf(temp[0].charAt(position)));
 			labels[2-x].setIcon(Assests.getIcon(value));
 		}
 		
 		Mode currentMode;
 		
-		if(temp[1].equals("+"))
+		if(temp[1].equals("+"))		// Determine the current mode of this question
 			currentMode = Mode.ADDITION;
 		else if(temp[1].equals("-"))
 			currentMode = Mode.SUBTRACTION;
@@ -77,25 +56,32 @@ public class MathDisplayPanel extends JPanel {
 		else
 			currentMode = Mode.MULTIPLICATION;
 		
-		labels[3].setIcon(Assests.getIcon(currentMode));
+		labels[3].setIcon(Assests.getIcon(currentMode));	// Set the icon for this mode '+' will be a plus icon. . .
 		
-		for(int x=0; x<temp[2].length(); x++){
+		for(int x=0; x<temp[2].length(); x++){		// Cycle through and place the second layer icons with corresponding value
 			int position = (temp[2].length()-1)-x;
 			int value = Integer.parseInt(String.valueOf(temp[2].charAt(position)));
 			labels[5-x].setIcon(Assests.getIcon(value));
 		}
 		
-		for(int x=6; x<9; x++)
+		for(int x=6; x<9; x++)		// Cycle through the third layer and set their icons to 'Lines'
 			labels[x].setIcon(Assests.getIcon(Mode.LINE));
 		
-		for(int x=9; x<12; x++)
+		for(int x=9; x<12; x++)		// Cycle through the last layer and set their icons to 'blanks'
 			labels[x].setIcon(Assests.getIcon(Mode.BLANK));
 	}
 	
+	/** Set the value of the next available slot of the for the value the player has entered
+	 * @param value - the value the player entered
+	 * @param slot - the current slot available
+	 */
 	public void buildAnswer(int value, int slot){
 				labels[11-slot].setIcon(Assests.getIcon(value));
 	}
 	
+	/** Set the value of the previously used slot to blank 
+	 * @param slot - the current slot being used
+	 */
 	public void removeAnswer(int slot){
 			labels[11-slot].setIcon(Assests.getIcon(Mode.BLANK));
 			

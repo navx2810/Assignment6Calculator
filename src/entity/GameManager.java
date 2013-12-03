@@ -25,6 +25,9 @@ public class GameManager implements Serializable {
 	static FileNameExtensionFilter filter = new FileNameExtensionFilter("Trivia Game Data", "tgd");
 	
 	
+	/** This method is used to initialize the GameManager
+	 * 
+	 */
 	public static void init(){
 		Assests.build();
 		buildQuestions();
@@ -34,11 +37,20 @@ public class GameManager implements Serializable {
 		
 	}
 
+	/** This method will prompt the user for their name and create a new QuestionManager.
+	 * 
+	 */
 	public static void createNewGame(){
 		GameManager.playerName = JOptionPane.showInputDialog(null, "What is your name?");
 		QuestionManager.createNewQuestionManager();
 	}
 	
+	/** This method will load the previous game file
+	 * @param file - the file where the game is saved
+	 * @throws FileNotFoundException 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public static void loadPreviousGame(File file) throws FileNotFoundException, IOException, ClassNotFoundException{
 		ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(file));
 		playerName = inputStream.readUTF();
@@ -47,6 +59,9 @@ public class GameManager implements Serializable {
 		inputStream.close();
 	}
 	
+	/** This method will display a fileChooser and ask where the user would like to save the file
+	 * then will save the file to that location
+	 */
 	public static void saveGame(){
 		
 	}

@@ -17,13 +17,11 @@ public class Question implements Serializable {
 		this.answer = answer;
 	}
 
-	/**
-	 * @param question
-	 */
-	public Question(String question) {
-		this.question = question;
-	}
 	
+	/** This method will check if the answer the user entered matches the answer found in the question
+	 * @param answerToQuestion - the answer the user entered
+	 * @return - true if the answer entered matches the answer inside the question || false if the answer does not match
+	 */
 	public boolean isCorrect(String answerToQuestion){
 		if(answer.equals(answerToQuestion))
 			return true;
