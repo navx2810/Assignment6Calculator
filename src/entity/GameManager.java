@@ -81,9 +81,15 @@ public class GameManager implements Serializable {
 		
 	}
 
+	
+	/** This method will tally up the score and display a dialogue box showing the users score.
+	 * This method will be called when the number of questions remaining equal zero.
+	 */
 	public static void completeGame() {
 		// Tally score
+		double score = questionManager.questionsRight / questionManager.totalQuestions;
 		// Display score
-		// Ask the user if they want to save or play again
+		JOptionPane.showConfirmDialog(null, String.format("You have achieved %.2f of answers correct. %s/%s", score, questionManager.questionsRight, questionManager.totalQuestions));
+		// Ask the user if they want play again
 	}
 }

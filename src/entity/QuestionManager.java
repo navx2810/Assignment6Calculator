@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * @author Matt
  * 
  */
+//TODO do not make this class static, change it so it can be saved
 public class QuestionManager implements Serializable {
 	
 	private static final long serialVersionUID = 7812867479079348517L;
@@ -51,13 +52,15 @@ public class QuestionManager implements Serializable {
 	 * @see GameManager
 	 */
 	public static void checkAnswer() {
-		if(GameManager.currentAnswer.toString().equals(currentQuestion.answer)){
+		//TODO remove this debug sysout
+		System.out.println("User answer: "+ currentUserAnswer.toString() + " || Answer to question: "+currentQuestion.answer);
+		if(currentUserAnswer.toString().equals(currentQuestion.answer)){
 			questionsRight++;
 			currentQuestion.answeredCorrectly = true;
-			
 		}
 		completedQuestions.add(currentQuestion);
 		System.out.println("You've answered: "+questionsRight+"/"+totalQuestions+" right");
+		currentUserAnswer.delete(0, currentUserAnswer.length());
 		
 	}
 	
