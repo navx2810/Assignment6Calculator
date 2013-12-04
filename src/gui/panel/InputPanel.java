@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import entity.QuestionManager;
+import entity.GameManager;
 import entity.ScreenManager;
 
 public class InputPanel extends JPanel {
@@ -68,7 +68,7 @@ public class InputPanel extends JPanel {
 			if(e.getSource() == btnErase)
 				ScreenManager.mainScreen.removeAnswer();
 			else if(e.getSource() == btnConfirm){
-				QuestionManager.checkAnswer();
+				GameManager.questionManager.checkAnswer();
 				ScreenManager.mainScreen.getNextQuestion();
 			}
 				

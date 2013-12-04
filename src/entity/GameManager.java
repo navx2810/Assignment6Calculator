@@ -33,6 +33,7 @@ public class GameManager implements Serializable {
 	public static void init(){
 		Assests.build();
 		buildQuestions();
+		chooser.setFileFilter(filter);
 	}
 	
 	private static void buildQuestions() {
@@ -44,7 +45,7 @@ public class GameManager implements Serializable {
 	 */
 	public static void createNewGame(){
 		GameManager.playerName = JOptionPane.showInputDialog(null, "What is your name?");
-		QuestionManager.createNewQuestionManager();
+		questionManager = new QuestionManager();
 	}
 	
 	/** This method will load the previous game file
@@ -87,9 +88,10 @@ public class GameManager implements Serializable {
 	 */
 	public static void completeGame() {
 		// Tally score
-		double score = questionManager.questionsRight / questionManager.totalQuestions;
+		double score = (double)questionManager.questionsRight / (double)questionManager.totalQuestions;
+		System.out.println(score);
 		// Display score
-		JOptionPane.showConfirmDialog(null, String.format("You have achieved %.2f of answers correct. %s/%s", score, questionManager.questionsRight, questionManager.totalQuestions));
+		JOptionPane.showConfirmDialog(null, String.format("You have achieved %s percent of answers correct. %s/%s", score*100, questionManager.questionsRight, questionManager.totalQuestions));
 		// Ask the user if they want play again
 	}
 }

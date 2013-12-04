@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import resources.Assests;
 import resources.Assests.Mode;
+import entity.GameManager;
 import entity.QuestionManager;
 
 public class MathDisplayPanel extends JPanel {
@@ -37,7 +38,7 @@ public class MathDisplayPanel extends JPanel {
 	 * @see QuestionManager
 	 */
 	public void buildQuestion(){
-		String[] temp = QuestionManager.currentQuestion.question.split(" ");	//Split the question into an array
+		String[] temp = GameManager.questionManager.currentQuestion.question.split(" ");	//Split the question into an array
 		
 		for(int x=0; x<temp[0].length(); x++){		// set the top layer icons of the grid to their corresponding value
 			int position = (temp[0].length()-1)-x;	

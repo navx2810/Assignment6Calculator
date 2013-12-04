@@ -1,11 +1,14 @@
 package gui;
 
-import entity.QuestionManager;
+import entity.GameManager;
 import gui.panel.InputPanel;
 import gui.panel.MathDisplayPanel;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -64,10 +67,38 @@ public class MainGameScreen extends JFrame {
 		
 		menuItemLoad = new JMenuItem("Load");
 		menuItemLoad.setMnemonic(KeyEvent.VK_L);
+		menuItemLoad.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					GameManager.loadPreviousGame();
+				} catch (ClassNotFoundException
+						| IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		menuItemQuit = new JMenuItem("Quit");
 		menuItemQuit.setMnemonic(KeyEvent.VK_Q);
+		menuItemQuit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		menuItemSave = new JMenuItem("Save");
 		menuItemSave.setMnemonic(KeyEvent.VK_S);
+		menuItemSave.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					GameManager.saveGame();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
 		
 		fileMenu.add(menuItemSave);
 		fileMenu.add(menuItemLoad);
@@ -111,7 +142,7 @@ public class MainGameScreen extends JFrame {
 	}
 
 	public void getNextQuestion(){
-		QuestionManager.loadNextQuestion();
+		GameManager.questionManager.loadNextQuestion();
 		mathDisplayPanel.buildQuestion();
 		currentAnswerSlot = 0;
 	}
@@ -124,7 +155,7 @@ public class MainGameScreen extends JFrame {
 	public void inputAnswer(int x){
 		if(currentAnswerSlot < 2){
 		mathDisplayPanel.buildAnswer(x,currentAnswerSlot);
-		QuestionManager.currentUserAnswer.insert(0, x);
+		GameManager.questionManager.currentUserAnswer.insert(0, x);
 		currentAnswerSlot++;
 		}
 	}
@@ -132,7 +163,7 @@ public class MainGameScreen extends JFrame {
 	public void removeAnswer(){
 		if(currentAnswerSlot > 0){
 			mathDisplayPanel.removeAnswer(currentAnswerSlot-1);
-			QuestionManager.currentUserAnswer.deleteCharAt(0);
+			GameManager.questionManager.currentUserAnswer.deleteCharAt(0);
 			currentAnswerSlot--;
 		}
 	}
